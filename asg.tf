@@ -35,9 +35,7 @@ resource "aws_security_group" "ec2-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "mkerimova"
-  }
+  tags = var.comman_tags
 }
 
 resource "aws_launch_configuration" "lc" {
@@ -61,9 +59,9 @@ EOF
 resource "aws_autoscaling_group" "asg" {
   name                      = "test-asg"
   launch_configuration      = aws_launch_configuration.lc.name
-  min_size                  = 3
-  max_size                  = 4
-  desired_capacity          = 3
+  min_size                  = 1
+  max_size                  = 3
+  desired_capacity          = 2
   health_check_type         = "ELB"
   health_check_grace_period = 300
   vpc_zone_identifier       = module.vpc.public_subnets

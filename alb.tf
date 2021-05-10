@@ -3,11 +3,9 @@ resource "aws_lb" "test-lb" {
   load_balancer_type = "application"
   internal           = false
   subnets            = module.vpc.public_subnets
-  tags = {
-    "env"       = "dev"
-    "createdBy" = "mkerimova"
-  }
-  security_groups = [aws_security_group.lb.id]
+  security_groups    = [aws_security_group.lb.id]
+
+  tags = var.comman_tags
 }
 
 resource "aws_security_group" "lb" {
@@ -26,10 +24,7 @@ resource "aws_security_group" "lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    "env"       = "dev"
-    "createdBy" = "mkerimova"
-  }
+  tags = var.comman_tags
 }
 
 resource "aws_lb_target_group" "lb_target_group" {

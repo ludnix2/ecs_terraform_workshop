@@ -1,9 +1,15 @@
+terraform {
+  required_providers {
+    aws = {
+      version = ">= 3.0"
+    }
+  }
+}
 provider "aws" {
-  region  = "us-east-1"
-  version = "~> 2.63"
+  region = "eu-central-1"
 }
 
-
+/*
 terraform {
   backend "s3" {
     bucket = "ecsworkshopbucket"
@@ -11,3 +17,4 @@ terraform {
     region = "us-east-1"
   }
 }
+*/
