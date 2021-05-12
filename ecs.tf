@@ -1,11 +1,11 @@
 resource "aws_ecs_cluster" "web-cluster" {
   name               = var.cluster_name
-  capacity_providers = [aws_ecs_capacity_provider.test.name]
+  capacity_providers = [aws_ecs_capacity_provider.hyeid.name]
   tags = var.comman_tags
 }
 
-resource "aws_ecs_capacity_provider" "test" {
-  name = "capacity-provider-test"
+resource "aws_ecs_capacity_provider" "hyeid" {
+  name = "hyeid-capacity-provider"
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.asg.arn
     managed_termination_protection = "ENABLED"
@@ -18,7 +18,7 @@ resource "aws_ecs_capacity_provider" "test" {
 }
 
 # update file container-def, so it's pulling image from ecr
-resource "aws_ecs_task_definition" "task-definition-test" {
+resource "aws_ecs_task_definition" "hyeid-task-definition" {
   family                = "web-family"
   container_definitions = file("container-definitions/container-def.json")
   network_mode          = "bridge"
@@ -28,15 +28,15 @@ resource "aws_ecs_task_definition" "task-definition-test" {
 resource "aws_ecs_service" "service" {
   name            = "web-service"
   cluster         = aws_ecs_cluster.web-cluster.id
-  task_definition = aws_ecs_task_definition.task-definition-test.arn
-  desired_count   = 4
+  task_definition = aws_ecs_task_definition.hyeid-task-definition.arn
+  desired_count   = 2
   ordered_placement_strategy {
     type  = "binpack"
     field = "cpu"
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.lb_target_group.arn
-    container_name   = "pink-slon"
+    container_name   = "hyeid"
     container_port   = 80
   }
   # Optional: Allow external changes without Terraform plan difference(for example ASG)

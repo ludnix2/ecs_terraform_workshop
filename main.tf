@@ -6,15 +6,14 @@ terraform {
   }
 }
 provider "aws" {
-  region = "eu-central-1"
+  region = "us-west-1"
 }
 
-/*
 terraform {
   backend "s3" {
-    bucket = "ecsworkshopbucket"
+    bucket = "connectto-terraform-backend"
     key    = "state/terraform.tfstate"
-    region = "us-east-1"
+    dynamodb_table = "terraform-state-locking"
+    region = "us-west-1"
   }
 }
-*/

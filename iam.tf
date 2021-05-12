@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ecs-instance-role" {
-  name = "ecs-instance-role-test-web"
+  name = "hyeid-ecs-instance-role-web"
   path = "/"
 
   assume_role_policy = <<EOF

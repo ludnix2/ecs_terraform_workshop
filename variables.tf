@@ -1,6 +1,6 @@
 variable "key_name" {
   type        = string
-  default     = "test"
+  default     = "hyeid-terraform"
   description = "The name for ssh key, used for aws_launch_configuration"
 }
 
@@ -13,7 +13,7 @@ variable "comman_tags" {
   type = map(string)
   default = {
     CreatedBy = "Ludwig Markosyan"
-    Project   = "Terraform ECS Cluster"
+    Project   = "HyeID"
     Env       = "Production"
   }
   description = "Our comman tags"

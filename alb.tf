@@ -1,5 +1,5 @@
-resource "aws_lb" "test-lb" {
-  name               = "test-ecs-lb"
+resource "aws_lb" "hyeid-lb" {
+  name               = "hyeid-ecs-lb"
   load_balancer_type = "application"
   internal           = false
   subnets            = module.vpc.public_subnets
@@ -28,7 +28,7 @@ resource "aws_security_group" "lb" {
 }
 
 resource "aws_lb_target_group" "lb_target_group" {
-  name        = "masha-target-group"
+  name        = "hyeid-target-group"
   port        = "80"
   protocol    = "HTTP"
   target_type = "instance"
@@ -44,7 +44,7 @@ resource "aws_lb_target_group" "lb_target_group" {
 }
 
 resource "aws_lb_listener" "web-listener" {
-  load_balancer_arn = aws_lb.test-lb.arn
+  load_balancer_arn = aws_lb.hyeid-lb.arn
   port              = "80"
   protocol          = "HTTP"
   default_action {

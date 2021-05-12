@@ -1,9 +1,9 @@
 [
     {
-      "name": "pink-slon",
-      "image": "nginx:latest",
-      "cpu": 10,
-      "memory": 128,
+      "name": "hyeid",
+      "image": "097649907373.dkr.ecr.us-west-1.amazonaws.com/hyeid_repo",
+      "cpu": 20,
+      "memory": 400,
       "essential": true,
       "portMappings": [
         {
