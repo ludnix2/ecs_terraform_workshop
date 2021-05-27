@@ -39,7 +39,7 @@ resource "aws_security_group" "ec2-sg" {
 }
 
 resource "aws_launch_configuration" "lc" {
-  name          = "hyeid_ecs"
+  name_prefix = "hyeid_ecs_"
   image_id      = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
   lifecycle {
@@ -57,23 +57,23 @@ EOF
 }
 
 resource "aws_autoscaling_group" "asg" {
-  name                      = "hyeid-asg"
+  name                      = "ASG-${aws_launch_configuration.lc.name}"
   launch_configuration      = aws_launch_configuration.lc.name
-  min_size                  = 1
+  min_size                  = 3
   max_size                  = 3
-  desired_capacity          = 2
+  desired_capacity          = 3
   health_check_type         = "ELB"
-  health_check_grace_period = 300
+  health_check_grace_period = 60
   vpc_zone_identifier       = module.vpc.public_subnets
-
-  target_group_arns     = [aws_lb_target_group.lb_target_group.arn]
+  
   protect_from_scale_in = true
+
+
+  #target_group_arns     = [aws_lb_target_group.hyeid_ui_front_target_group.arn]
   lifecycle {
     create_before_destroy = true
     ignore_changes = [
-      min_size,
-      max_size,
-      desired_capacity
+      tags
     ]
   }
 }

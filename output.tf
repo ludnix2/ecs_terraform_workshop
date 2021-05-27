@@ -1,5 +1,5 @@
 output "alb_dns" {
-  value = aws_lb.hyeid-lb.dns_name
+  value = aws_lb.hyeid_lb.dns_name
 }
 
 output "vpc_id" {

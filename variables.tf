@@ -6,9 +6,16 @@ variable "key_name" {
 
 variable "cluster_name" {
   type        = string
-  default     = "ecs-terraform-cluster"
+  default     = "hyeid-cluster"
   description = "The name of AWS ECS cluster"
 }
+
+variable "hyeid_ui_back_domain_name" {
+  type        = string
+  default     = "api.hyeid.org"
+  description = "Domain name for Hyeid-ui-back app."
+}
+
 variable "comman_tags" {
   type = map(string)
   default = {
@@ -19,4 +26,3 @@ variable "comman_tags" {
   description = "Our comman tags"
 
 }
-

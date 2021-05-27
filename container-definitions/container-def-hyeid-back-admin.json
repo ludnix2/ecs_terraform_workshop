@@ -1,0 +1,22 @@
+[
+    {
+      "name": "hyeid-back-admin",
+      "image": "097649907373.dkr.ecr.us-west-1.amazonaws.com/hyeid-back-admin",
+      "cpu": 20,
+      "memory": 256,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+            "awslogs-group": "awslogs-hyeid-back-admin",
+            "awslogs-region": "us-west-1",
+            "awslogs-stream-prefix": "awslogs-hyeid-back-admin"
+        }
+    }
+    }
+]
